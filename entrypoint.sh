@@ -1,14 +1,18 @@
 #!/bin/bash
 
-echo "============="
+echo "============ Running Podcast Feed Generator ============"
 
+# Set up Git identity
 git config --global user.name "${GITHUB_ACTOR}"
-git config --global user.name "${INPUT_EMAIL}"
+git config --global user.email "${INPUT_EMAIL}"
 git config --global --add safe.directory /github/workspace
 
-python3 C:\Users\91757\code
+# Run the Python feed generator
+python3 feed.py
 
-git add -A && git commit -m "update feed"
-git push --set-stream origin main
+# Commit and push the changes
+git add -A
+git commit -m "update feed"
+git push origin main
 
-echo "============="
+echo "============ Done ============"
