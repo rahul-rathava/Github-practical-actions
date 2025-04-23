@@ -1,0 +1,15 @@
+from ubuntu:latest
+
+run apt-get update && apt-get install -y \
+pyhton3.10 \
+python3-pip \ 
+git
+
+run pip3 install pyyaml
+
+copy feed.py  C:\Users\91757\code
+
+copy entrypoint.sh /entrypoint.sh
+
+entrypoint ["/entrypoint.sh"]
+ 
