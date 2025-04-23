@@ -1,15 +1,23 @@
-from ubuntu:latest
+FROM ubuntu:latest
 
-run apt-get update && apt-get install -y \
-pyhton3.10 \
-python3-pip \ 
-git
+# Update system and install Python, pip, and git
+RUN apt-get update && apt-get install -y \
+    python3.10 \
+    python3-pip \
+    git
 
-run pip3 install pyyaml
+# Install Python package
+RUN pip3 install pyyaml
 
-copy feed.py  C:\Users\91757\code
+# Copy files into the container
+COPY feed.py /app/feed.py
+COPY entrypoint.sh /entrypoint.sh
 
-copy entrypoint.sh /entrypoint.sh
+# Make the entrypoint script executable
+RUN chmod +x /entrypoint.sh
 
-entrypoint ["/entrypoint.sh"]
- 
+# Set working directory
+WORKDIR /app
+
+# Set entrypoint
+ENTRYPOINT ["/entrypoint.sh"]
